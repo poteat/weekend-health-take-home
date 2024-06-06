@@ -35,3 +35,15 @@ const canBeRearranged = (corpus: Record<string, number>, b: string) =>
 export const findWords = (input: string, dict: string[]) =>
   dict.filter((x) => canBeRearranged(countBy(input), x));
 ```
+
+## Utility Methods
+
+We additionally provide an implementation of the two utility methods `countBy` and `every`:
+
+```ts
+const countBy = (s: string): Record<string, number> =>
+  [...s].reduce((obj, c) => ({ ...obj, [c]: obj[c] ?? 0 + 1 }), {});
+
+const every = <T>(obj: Record<string, T>, f: (x: T, key: string) => boolean) =>
+  Object.entries(obj).every(([key, value]) => f(value, key));
+```
