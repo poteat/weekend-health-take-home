@@ -13,3 +13,28 @@ Our approach is a direct translation of the above method, by memoizing the count
 ## Automated Testing
 
 Automated tests, configured with Jest can be ran via `npm test`.
+
+## Source Annotation
+
+The solution is separated into methods, `canBeRearranged(x, y)` and `findWords(s, dict)`.
+
+### `canBeRearranged`
+
+`canBeRearranged` is a curried function (to provide a closure to save the corpus-count of $a$ across invocations). The implementation uses `countBy`, which when invoked on a string converts the string into a hashmap of the number of instances of each character.
+
+```ts
+const canBeRearranged = (a: string) => {
+  const corpus = countBy(a);
+  return (b: string) =>
+    every(countBy(b), (amt, key) => (corpus[key] ?? 0) >= amt);
+};
+```
+
+### `findWords`
+
+`findWords` is a simple filtering over `dict` such that each element can be formed of a partial rearrangement of `input`.
+
+```ts
+export const findWords = (input: string, dict: string[]) =>
+  dict.filter(canBeRearranged(input));
+```
