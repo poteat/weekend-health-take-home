@@ -20,14 +20,11 @@ The solution is separated into methods, `canBeRearranged(x, y)` and `findWords(s
 
 ### `canBeRearranged`
 
-`canBeRearranged` is a curried function (to provide a closure to save the corpus-count of $a$ across invocations). The implementation uses `countBy`, which when invoked on a string converts the string into a hashmap of the number of instances of each character.
+`canBeRearranged` is a function that takes in a corpus and input string. The corpus represents the amount of copies available for each character. The implementation uses `countBy`, which when invoked on a string converts the string into a hashmap of the number of instances of each character.
 
 ```ts
-const canBeRearranged = (a: string) => {
-  const corpus = countBy(a);
-  return (b: string) =>
-    every(countBy(b), (amt, key) => (corpus[key] ?? 0) >= amt);
-};
+const canBeRearranged = (corpus: Record<string, number>, b: string) =>
+  every(countBy(b), (amt, key) => (corpus[key] ?? 0) >= amt);
 ```
 
 ### `findWords`
@@ -36,5 +33,5 @@ const canBeRearranged = (a: string) => {
 
 ```ts
 export const findWords = (input: string, dict: string[]) =>
-  dict.filter(canBeRearranged(input));
+  dict.filter((x) => canBeRearranged(countBy(input), x));
 ```
