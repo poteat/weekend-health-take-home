@@ -1,26 +1,5 @@
-/**
- * Alternative implementation of Lodash's 'countBy' method which takes in a
- * string and returns an accounting of how many instances of each letter exists
- * in the input string.
- *
- * @param s String to provide a count of each character for.
- *
- * @returns How many instances of each character exists in the input string.
- */
-const countBy = (s: string): Record<string, number> =>
-  [...s].reduce((obj, c) => ({ ...obj, [c]: obj[c] ?? 0 + 1 }), {});
-
-/**
- * Whether or not every key-value pair on `obj` returns true when applied to the
- * predicate `f`.
- *
- * @param obj Input object to check the predicate for.
- * @param f Predicate which returns a boolean and takes in a key-value pair.
- *
- * @returns Whether or not each entry in `obj` returns true for predicate `f`.
- */
-const every = <T>(obj: Record<string, T>, f: (x: T, key: string) => boolean) =>
-  Object.entries(obj).every(([key, value]) => f(value, key));
+import { countBy } from "./utilities/countBy";
+import { every } from "./utilities/every";
 
 /**
  * Verify whether or not string `b` can be formed of a rearrangement of string
