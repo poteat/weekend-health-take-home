@@ -6,7 +6,7 @@ Given a string $S$ and array of strings $A$, return all elements of $A$ such tha
 
 ## Approach
 
-![diagram](./docs/diagram.png)
+<img src="./docs/diagram.drawio.svg" alt="diagram" width="50%">
 
 It is true that "$S_1$ is a partial rearrangement of $S_2$" is equivalent to $\forall c \in S_1: \text{Count}[c, S_1] \leq \text{Count}[c, S_2]$, i.e. that the _count_ of each character in $S_1$ is less than or equal to the count of that character in $S_2$.
 
